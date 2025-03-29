@@ -1,10 +1,10 @@
 <?php
 
-namespace Encore\Admin\GridSortable;
+namespace OpenAdminCore\Admin\GridSortable;
 
-use Encore\Admin\Extension;
-use Encore\Admin\Grid;
-use Encore\Admin\Grid\Tools\ColumnSelector;
+use OpenAdminCore\Admin\Extension;
+use OpenAdminCore\Admin\Grid;
+use OpenAdminCore\Admin\Grid\Tools\ColumnSelector;
 use Spatie\EloquentSortable\Sortable;
 
 class GridSortable extends Extension

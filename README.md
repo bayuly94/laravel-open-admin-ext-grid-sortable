@@ -10,13 +10,13 @@ This extension can help you sort by dragging the rows of the data list, the fron
 ## Installation
 
 ```shell
-composer require laravel-admin-ext/grid-sortable -vvv
+composer require laravel-open-admin-ext/grid-sortable -vvv
 ```
 
 Publish asserts
 
 ```shell
-php artisan vendor:publish --provider="Encore\Admin\GridSortable\GridSortableServiceProvider"
+php artisan vendor:publish --provider="OpenAdminCore\Admin\GridSortable\GridSortableServiceProvider"
 ```
 
 ## Usage

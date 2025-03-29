@@ -1,8 +1,8 @@
 <?php
 
-namespace Encore\Admin\GridSortable;
+namespace OpenAdminCore\Admin\GridSortable;
 
-use Encore\Admin\Admin;
+use OpenAdminCore\Admin\Admin;
 use Illuminate\Support\ServiceProvider;
 
 class GridSortableServiceProvider extends ServiceProvider

@@ -1,6 +1,6 @@
 <?php
 
-namespace Encore\Admin\GridSortable\Controllers;
+namespace OpenAdminCore\Admin\GridSortable\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;

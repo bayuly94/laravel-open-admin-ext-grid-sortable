@@ -1,9 +1,9 @@
 <?php
 
-namespace Encore\Admin\GridSortable;
+namespace OpenAdminCore\Admin\GridSortable;
 
-use Encore\Admin\Admin;
-use Encore\Admin\Grid\Tools\AbstractTool;
+use OpenAdminCore\Admin\Admin;
+use OpenAdminCore\Admin\Grid\Tools\AbstractTool;
 
 class SaveOrderBtn extends AbstractTool
 {

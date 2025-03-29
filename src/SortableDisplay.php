@@ -1,9 +1,9 @@
 <?php
 
-namespace Encore\Admin\GridSortable;
+namespace OpenAdminCore\Admin\GridSortable;
 
-use Encore\Admin\Admin;
-use Encore\Admin\Grid\Displayers\AbstractDisplayer;
+use OpenAdminCore\Admin\Admin;
+use OpenAdminCore\Admin\Grid\Displayers\AbstractDisplayer;
 
 class SortableDisplay extends AbstractDisplayer
 {
