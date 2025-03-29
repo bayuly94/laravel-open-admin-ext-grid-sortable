@@ -18,7 +18,7 @@ class GridSortableServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole() && $assets = $extension->assets()) {
             $this->publishes(
-                [$assets => public_path('vendor/laravel-admin-ext/grid-sortable')],
+                [$assets => public_path('vendor/laravel-open-admin-ext/grid-sortable')],
                 'laravel-admin-grid-sortable'
             );
         }
@@ -26,7 +26,7 @@ class GridSortableServiceProvider extends ServiceProvider
         GridSortable::routes(__DIR__.'/../routes/web.php');
 
         Admin::booting(function () {
-            Admin::js('vendor/laravel-admin-ext/grid-sortable/jquery-ui.min.js');
+            Admin::js('vendor/laravel-open-admin-ext/grid-sortable/jquery-ui.min.js');
         });
 
         $extension->install();
