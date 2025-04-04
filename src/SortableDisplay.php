@@ -11,25 +11,44 @@ class SortableDisplay extends AbstractDisplayer
     {
         $id = $this->getGrid()->tableID;
 
+        $route = route('open-admin-grid-sortable');
+        $class = addslashes(get_class($this->getGrid()->model()->getOriginalModel()));
+
         $script = <<<SCRIPT
-        
-(function () {
-    $("#{$id} tbody").sortable({
-        placeholder: "sort-highlight",
-        handle: ".grid-sortable-handle",
-        forcePlaceholderSize: true,
-        zIndex: 999999
-    }).on("sortupdate", function(event, ui) {
-    
-        var sorts = [];
-        $(this).find('.grid-sortable-handle').each(function () {
-            sorts.push($(this).data());
+
+
+    let sortableSettings = {
+        animation: 150,
+        fallbackOnBody: false,
+        swapThreshold: 0.65,
+        handle : '.grid-sortable-handle',
+        onUpdate: function (evt) {
+            document.querySelector(".grid-save-order-btn").classList.remove("d-none");
+        },
+    }
+    let setSortable = new Sortable(document.querySelector("#{$id} tbody"), sortableSettings);
+
+    document.querySelector(".grid-save-order-btn").addEventListener("click",function () {
+
+        let sorts = [];
+        document.querySelectorAll('.grid-sortable-handle').forEach(elm => {
+            sorts.push(elm.dataset);
         });
-        
-        var \$btn = $('#{$id}').closest('.box').find('.grid-save-order-btn');
-        \$btn.data('sort', sorts).show();
+
+        admin.ajax.post('{$route}', {
+            _model: '{$class}',
+            _sort: sorts,
+        },
+        function(result){
+            if (result.data.status) {
+                admin.toastr.success(result.data.message);
+                admin.ajax.reload();
+            } else {
+                admin.toastr.error(result.data.message);
+            }
+        });
     });
-})();
+
 SCRIPT;
 
         Admin::script($script);
@@ -51,9 +70,8 @@ SCRIPT;
 
         return <<<HTML
 <a class="grid-sortable-handle" style="cursor: move;" data-key="{$key}" data-sort="{$sort}">
-    <i class="fa fa-ellipsis-v"></i>
-    <i class="fa fa-ellipsis-v"></i>
-  </a>
+    <i class="icon-arrows-alt-v"></i>
+</a>
 HTML;
     }
 }

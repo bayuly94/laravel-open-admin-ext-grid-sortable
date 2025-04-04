@@ -11,8 +11,6 @@ class GridSortable extends Extension
 {
     public $name = 'grid-sortable';
 
-    public $assets = __DIR__.'/../resources/assets';
-
     protected $column = '__sortable__';
 
     public function install()
@@ -20,7 +18,6 @@ class GridSortable extends Extension
         ColumnSelector::ignore($column = $this->column);
 
         Grid::macro('sortable', function () use ($column) {
-
             $this->tools(function (Grid\Tools $tools) {
                 $tools->append(new SaveOrderBtn());
             });

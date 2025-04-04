@@ -18,8 +18,8 @@ class GridSortableController extends Controller
                 collect($sorts)->pluck('sort')->sort()
             );
 
-        $status     = true;
-        $message    = trans('admin.save_succeeded');
+        $status = true;
+        $message = trans('admin.save_succeeded');
         $modelClass = $request->get('_model');
 
         try {
@@ -27,14 +27,13 @@ class GridSortableController extends Controller
             $models = $modelClass::find($sorts->keys());
 
             foreach ($models as $model) {
-
                 $column = data_get($model->sortable, 'order_column_name', 'order_column');
 
                 $model->{$column} = $sorts->get($model->getKey());
                 $model->save();
             }
         } catch (Exception $exception) {
-            $status  = false;
+            $status = false;
             $message = $exception->getMessage();
         }
 
