@@ -10,23 +10,33 @@ class GridSortableController extends Controller
 {
     public function sort(Request $request)
     {
-        $sorts = $request->get('_sort');
+        $sorts = collect($request->get('_sort'));
 
-        $sorts = collect($sorts)
+        /**
+         * Result contoh:
+         * [
+         *   15 => 0,
+         *   9  => 1,
+         *   3  => 2,
+         * ]
+         */
+        $orders = $sorts
             ->pluck('key')
-            ->combine(
-                collect($sorts)->pluck('sort')->sort()
-            );
+            ->values();
 
         $status = true;
         $message = trans('admin.save_succeeded');
         $modelClass = $request->get('_model');
 
         try {
-            /** @var \Illuminate\Database\Eloquent\Collection $models */
-            $models = $modelClass::find($sorts->keys());
+            foreach ($orders as $index => $id) {
+                /** @var \Illuminate\Database\Eloquent\Model $model */
+                $model = $modelClass::find($id);
 
-            foreach ($models as $index => $model) {
+                if (!$model) {
+                    continue;
+                }
+
                 $column = data_get($model->sortable, 'order_column_name', 'order_column');
 
                 $model->{$column} = $index;
